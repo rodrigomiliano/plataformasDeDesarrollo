@@ -6,6 +6,13 @@ namespace ConsoleApp1
 {
     public class Tarea
     {
+        //nuevas (de la ultima clase)
+        public int Id { get; set; }        
+        public int TipoId { get; set; }
+        public TipoTarea Tipo { get; set; }               
+
+              
+        //Estas las tenía antes del entityframe
         public string titulo { get; set; }
         public DateTime vencimiento { get; set; }
         public string estimacion { get; set; }
