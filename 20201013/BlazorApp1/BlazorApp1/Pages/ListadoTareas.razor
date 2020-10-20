@@ -1,0 +1,52 @@
+﻿@page "/ListadoTareas"
+
+
+
+@using BlazorApp1.Data
+@inject TareasService TareasService
+
+<h1>Listado de Tareas</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (tareas == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Vencimiento</th>
+                <th>Estimación</th>
+                <th>RecursoId</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Tareas in tareas)
+            {
+            <tr>
+                <td>@Tareas.Id</td>
+                <td>@Tareas.Titulo</td>
+                <td>@Tareas.Vencimiento</td>
+                <td>@Tareas.Estimacion</td>
+                <td>@Tareas.RecursoId</td>
+                <td>@Tareas.Estado</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Tareas[] tareas;
+
+    protected override async Task OnInitializedAsync()
+    {
+        tareas = TareasService.GetTareas();
+    }
+}
