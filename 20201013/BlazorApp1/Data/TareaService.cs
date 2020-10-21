@@ -10,16 +10,16 @@ namespace BlazorApp1.Data
         public Tarea[] GetTareas()
         {
             Tarea[] resultado = new Tarea[10];
-            resultado[0] = new Tarea(1, "Tarea 1", "2020/05/10", 12, 1, "Pendiente");
-            resultado[1] = new Tarea(2, "Tarea 2", "2020/02/12", 15, 2, "En Proceso");
-            resultado[2] = new Tarea(3, "Tarea 3", "2020/01/22", 5, 2, "Finalizada");
-            resultado[3] = new Tarea(4, "Tarea 4", "2020/11/13", 12, 5, "Pendiente");
-            resultado[4] = new Tarea(5, "Tarea 5", "2020/09/19", 7, 3, "En Proceso");
-            resultado[5] = new Tarea(6, "Tarea 6", "2020/10/02", 20, 1, "Pendiente");
-            resultado[6] = new Tarea(7, "Tarea 7", "2020/05/25", 7, 3, "En Proceso");
-            resultado[7] = new Tarea(8, "Tarea 8", "2020/07/30", 12, 2, "En Proceso");
-            resultado[8] = new Tarea(9, "Tarea 9", "2020/03/15", 20, 2, "Finalizada");
-            resultado[9] = new Tarea(10, "Tarea 10", "2020/07/30", 5, 4, "Finalizada");
+            resultado[0] = new Tarea(1, "Cableado", "2020/09/27", 15, 1, "Realizada");
+            resultado[1] = new Tarea(2, "Electricidad", "2020/09/28", 20, 2, "Realizada");
+            resultado[2] = new Tarea(3, "Discusion", "2020/09/29", 10, 3, "Pendiente");
+            resultado[3] = new Tarea(4, "Basurero", "2020/09/30", 13, 4, "Incompleta");
+            resultado[4] = new Tarea(5, "Busqueda", "2020/10/01", 16, 5, "Realizada");
+            resultado[5] = new Tarea(6, "Alineación", "2020/10/02", 27, 6, "Realizada");
+            resultado[6] = new Tarea(7, "Escanear", "2020/10/03", 32, 7, "Realizada");
+            resultado[7] = new Tarea(8, "Diagnostico", "2020/10/04", 99, 8, "Incompleta");
+            resultado[8] = new Tarea(9, "Limpieza", "2020/10/05", 41, 9, "Pendiente");
+            resultado[9] = new Tarea(10, "Monitoreo", "2020/10/06", 22, 10, "Pendiente");
 
             return resultado;
         }

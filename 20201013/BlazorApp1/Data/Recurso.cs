@@ -12,5 +12,14 @@ namespace BlazorApp1.Data
 
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
+
+
+        public Recurso() { }
+        public Recurso(int Id, string Nombre, int UsuarioId)
+        {
+            this.Id = Id;
+            this.Nombre = Nombre;
+            this.UsuarioId = UsuarioId;
+        }
     }
 }
