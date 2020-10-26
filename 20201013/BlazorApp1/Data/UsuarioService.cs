@@ -26,8 +26,7 @@ namespace BlazorApp1.Data
         }
 
         public List<Usuario> ListarUsuario()
-        {
-            try
+        {            
             {
                 var ctx = new TareasDbContext();
                 var lista = ctx.Usuarios.ToList();
@@ -36,15 +35,7 @@ namespace BlazorApp1.Data
                     Console.WriteLine($"Nombre: {item.Nombre} ({item.UsuarioPK})");
                 }*/
                 return lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            
-            
-
+            }     
         }
 
         public Usuario SeleccionarUsuario(int id)
