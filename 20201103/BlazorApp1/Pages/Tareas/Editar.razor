@@ -1,0 +1,47 @@
+﻿@page "/tareas/editar/{id:int}"
+@using BlazorApp1.Data
+@inject TareaService service
+@inject NavigationManager navigation
+
+<EditForm Model="@Modelo" OnValidSubmit="@Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group row">
+        <label for="lastName" class="col-sm-2 col-form-label">
+            Nombre
+        </label>
+        <div class="col-sm-10">
+            <InputText @bind-Value="Modelo.Titulo" />
+        </div>
+    </div>    
+
+    <button type="submit">Guardar</button>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    public Tarea Modelo { get; set; } = new Tarea();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id > 0)
+        {
+            Modelo = await service.Get(Id);
+        }
+        else
+        {
+            Modelo = new Tarea();
+        }
+    }
+
+
+    private async void Guardar()
+    {
+        await service.Save(Modelo);
+        navigation.NavigateTo("tareas/listado");
+    }
+}
