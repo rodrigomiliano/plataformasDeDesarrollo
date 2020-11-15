@@ -20,9 +20,11 @@ namespace BlazorApp1.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("DetalleId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Fecha")
+                        .HasColumnName("Fecha")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("RecursoId")
@@ -32,7 +34,8 @@ namespace BlazorApp1.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Tiempo")
-                        .HasColumnType("INTEGER");
+                        .HasColumnName("Tiempo")
+                        .HasColumnType("int(5)");
 
                     b.HasKey("Id");
 
@@ -40,17 +43,20 @@ namespace BlazorApp1.Migrations
 
                     b.HasIndex("TareaId");
 
-                    b.ToTable("Detalles");
+                    b.ToTable("Detalle");
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Recurso", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("RecursoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnName("Recurso")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("INTEGER");
@@ -59,22 +65,42 @@ namespace BlazorApp1.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Recursos");
+                    b.ToTable("Recurso");
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Tarea", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("TareaId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Estado")
+                        .HasColumnName("Estado")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<int>("Estimacion")
+                        .HasColumnName("Estimacion")
+                        .HasColumnType("int(2)");
+
+                    b.Property<int>("ResponsableId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TipoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnName("Titulo")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime>("Vencimiento")
+                        .HasColumnName("Vencimiento")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ResponsableId");
 
                     b.HasIndex("TipoId");
 
@@ -85,30 +111,38 @@ namespace BlazorApp1.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("TipoTareaId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnName("Nombre")
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoTareas");
+                    b.ToTable("TipoTarea");
                 });
 
             modelBuilder.Entity("BlazorApp1.Data.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("UsuarioId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Apodo")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Clave")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnName("Clave")
+                        .HasColumnType("varchar(15)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnName("Usuario")
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -141,6 +175,12 @@ namespace BlazorApp1.Migrations
 
             modelBuilder.Entity("BlazorApp1.Data.Tarea", b =>
                 {
+                    b.HasOne("BlazorApp1.Data.Recurso", "Responsable")
+                        .WithMany()
+                        .HasForeignKey("ResponsableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BlazorApp1.Data.TipoTarea", "Tipo")
                         .WithMany()
                         .HasForeignKey("TipoId")

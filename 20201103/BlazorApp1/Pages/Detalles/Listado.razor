@@ -15,17 +15,25 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Nombre</th>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Tiempo</th>
+                <th>Recurso</th>
+                <th>Tarea</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in detalles)
             {
-                <tr>
-                    <td>@item.Tiempo</td>
-                    <td><button class="btn" @onclick="()=>Editar(item.Id)">Editar</button> <button class="btn" @onclick="()=>Borrar(item.Id)">Borrar</button></td>
-                </tr>
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Fecha</td>
+                <td>@item.Tiempo</td>
+                <td>@item.Recurso.Nombre</td>
+                <td>@item.Tarea.Titulo</td>
+                <td><button class="btn" @onclick="()=>Editar(item.Id)">Editar</button> <button class="btn" @onclick="()=>Borrar(item.Id)">Borrar</button></td>
+            </tr>
             }
         </tbody>
     </table>
@@ -50,7 +58,8 @@ else
         bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Desea elimiar el detalle?");
         if (confirmed)
         {
-
+            await service.Remove(id);
+            detalles = await service.GetAll();
         }
     }
 }

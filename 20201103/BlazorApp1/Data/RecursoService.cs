@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace BlazorApp1.Data
 {
     public class RecursoService
@@ -38,5 +39,20 @@ namespace BlazorApp1.Data
             await context.SaveChangesAsync();
             return value;
         }
+
+        public async Task<bool> Remove(int id)
+        {
+            var entidad = await context.Recursos.Where(i => i.Id == id).SingleAsync();
+            context.Recursos.Remove(entidad);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<List<Usuario>> GetUsuario()
+        {
+            return await context.Usuarios.ToListAsync();
+        }
+
+
     }
 }

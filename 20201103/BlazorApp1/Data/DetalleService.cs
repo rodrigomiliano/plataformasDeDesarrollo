@@ -22,8 +22,8 @@ namespace BlazorApp1.Data
 
         public async Task<List<Detalle>> GetAll()
         {
-            return await context.Detalles.ToListAsync();
-        }
+            return await context.Detalles.Include(i => i.Recurso).Include(i => i.Tarea).ToListAsync();
+        }             
 
         public async Task<Detalle> Save(Detalle value)
         {
@@ -38,5 +38,14 @@ namespace BlazorApp1.Data
             await context.SaveChangesAsync();
             return value;
         }
+
+        public async Task<bool> Remove(int id)
+        {
+            var entidad = await context.Detalles.Where(i => i.Id == id).SingleAsync();
+            context.Detalles.Remove(entidad);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
     }
 }

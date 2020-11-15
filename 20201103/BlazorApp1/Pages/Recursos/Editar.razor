@@ -16,6 +16,17 @@
         </div>
     </div>
 
+    <div class="mb-3">
+        Usuario:
+        <InputSelect class="py-1" @bind-Value="UsuarioId">
+            <option value="0">Elija un Usuario</option>
+            @foreach (var item in Usuarios)
+            {
+                <option value="@item.Id">@item.Nombre</option>
+            }
+        </InputSelect>
+    </div>
+
     <button type="submit">Guardar</button>
 </EditForm>
 
@@ -26,21 +37,28 @@
 
     public Recurso Modelo { get; set; } = new Recurso();
 
+    public string UsuarioId { get; set; }
+
+    private List<Usuario> Usuarios;
+
     protected override async Task OnInitializedAsync()
     {
         if (Id > 0)
         {
             Modelo = await service.Get(Id);
+            UsuarioId = Modelo.UsuarioId.ToString();
         }
         else
         {
             Modelo = new Recurso();
         }
+        Usuarios = await service.GetUsuario();
     }
 
 
     private async void Guardar()
     {
+        Modelo.UsuarioId = int.Parse(UsuarioId);
         await service.Save(Modelo);
         navigation.NavigateTo("recursos/listado");
     }

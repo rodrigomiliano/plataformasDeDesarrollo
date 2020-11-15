@@ -45,7 +45,7 @@ namespace BlazorApp1.Data
             context.Usuarios.Remove(entidad);
             await context.SaveChangesAsync();
             return true;
-        }       
+        }             
 
     }
 }
