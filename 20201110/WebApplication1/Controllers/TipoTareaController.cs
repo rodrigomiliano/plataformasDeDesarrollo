@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entidades;
 using WebApplication1.Data;
-
+/*
 namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
@@ -25,3 +25,4 @@ namespace WebApplication1.Controllers
         }
     }
 }
+*/

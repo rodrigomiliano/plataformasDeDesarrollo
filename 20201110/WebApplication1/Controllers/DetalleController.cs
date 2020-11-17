@@ -4,15 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication1.Controllers
+namespace WebApplication1.Data
 {
-    public class DetalleController : Controller
-    {
-        [Route("api/[controller]")]
-        [ApiController]
-        public IActionResult Index()
+    [Route("api/[controller]")]
+    [ApiController]
+    public class DetalleController : ControllerBase
+    {        
+        /*public IActionResult Index()
         {
             return View();
+        }*/
+
+        private readonly DataContext ctx;
+        public DetalleController(DataContext _context)
+        {
+            ctx = _context;
+        }
+
+        public List<Detalle> Get()
+        {
+            return ctx.Detalles.ToList();
         }
     }
 }
