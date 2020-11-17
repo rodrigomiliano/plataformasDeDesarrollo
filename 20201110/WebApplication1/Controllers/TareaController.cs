@@ -20,6 +20,7 @@ namespace WebApplication1.Data
             ctx = _context;
         }
 
+        [HttpGet]
         public List<Tarea> Get()
         {
             return ctx.Tareas.ToList();
