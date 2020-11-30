@@ -26,13 +26,17 @@ namespace BlazorApp1.Data
 
         public async Task<Recurso> SelectResource(int id)
         {
-            return await ctx.Recursos.Where(i => i.Id == id).SingleAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
+            return await remoteService.GetRecurso(id);
+            //return await ctx.Recursos.Where(i => i.Id == id).SingleAsync();
         }
 
 
         public async Task<List<Recurso>> GetAll()//agregado 24/11
         {
-            return await ctx.Recursos.ToListAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
+            return await remoteService.GetAllRecurso();
+            //return await ctx.Recursos.ToListAsync();
         }
 
         public async Task<Recurso> SaveResource(Recurso value)
@@ -53,11 +57,11 @@ namespace BlazorApp1.Data
 
         public async Task<bool> DeleteResource(int id)
         {
-            Recurso res = await ctx.Recursos.Where(i => i.Id == id).SingleAsync();
-
-            ctx.Recursos.Remove(res);
-
-            await ctx.SaveChangesAsync();
+            //Recurso res = await ctx.Recursos.Where(i => i.Id == id).SingleAsync();
+            //ctx.Recursos.Remove(res);
+            //await ctx.SaveChangesAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
+            await remoteService.BorrarRecurso(id);
             return true;
         }
 

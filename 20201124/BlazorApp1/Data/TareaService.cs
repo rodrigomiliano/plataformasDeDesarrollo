@@ -26,13 +26,17 @@ namespace BlazorApp1.Data
 
         public async Task<Tarea> SelectTask(int id)
         {
-            return await ctx.Tareas.Where(i => i.Id == id).SingleAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
+            return await remoteService.GetTarea(id);
+            //return await ctx.Tareas.Where(i => i.Id == id).SingleAsync();
         }
 
 
         public async Task<List<Tarea>> GetAll()//agregado 24/11
         {
-            return await ctx.Tareas.ToListAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
+            return await remoteService.GetAllTarea();
+            //return await ctx.Tareas.ToListAsync();
         }
 
         public async Task<Tarea> SaveTask(Tarea value)
@@ -53,11 +57,11 @@ namespace BlazorApp1.Data
 
         public async Task<bool> DeleteTask(int id)
         {
-            Tarea task = await ctx.Tareas.Where(i => i.Id == id).SingleAsync();
-
-            ctx.Tareas.Remove(task);
-
-            await ctx.SaveChangesAsync();
+            //Tarea task = await ctx.Tareas.Where(i => i.Id == id).SingleAsync();
+            //ctx.Tareas.Remove(task);
+            //await ctx.SaveChangesAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
+            await remoteService.BorrarTarea(id);
             return true;
         }
 

@@ -26,13 +26,17 @@ namespace BlazorApp1.Data
 
         public async Task<Usuario> SelectUser(int id)
         {
-            return await ctx.Usuarios.Where(i => i.UsuarioPK == id).SingleAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
+            //return await ctx.Usuarios.Where(i => i.UsuarioPK == id).SingleAsync();
+            return await remoteService.GetUsuario(id);
         }
 
                
         public async Task<List<Usuario>> GetAll()//agregado 24/11
         {
-            return await ctx.Usuarios.ToListAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
+            return await remoteService.GetAllUsuario();
+            //return await ctx.Usuarios.ToListAsync();
         }
 
 
@@ -55,11 +59,11 @@ namespace BlazorApp1.Data
 
         public async Task<bool> DeleteUser(int id)
         {
-            Usuario user = await ctx.Usuarios.Where(i => i.UsuarioPK == id).SingleAsync();
-
-            ctx.Usuarios.Remove(user);
-
-            await ctx.SaveChangesAsync();
+            //Usuario user = await ctx.Usuarios.Where(i => i.UsuarioPK == id).SingleAsync();
+            //ctx.Usuarios.Remove(user);
+            //await ctx.SaveChangesAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
+            await remoteService.BorrarUsuario(id);
             return true;
         }
 

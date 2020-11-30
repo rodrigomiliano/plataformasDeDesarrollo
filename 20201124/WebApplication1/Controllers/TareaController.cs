@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication1.Data
+namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -28,10 +29,15 @@ namespace WebApplication1.Data
             return ctx.Tareas.Include(i => i.Responsable).ToList();
         }
 
-        /*
+        [HttpGet("{id}")]
+        public Tarea Get (int id)
+        {
+            return ctx.Tareas.Where(i => i.Id == id).Single();
+        }
+
         [HttpPost]
         public Tarea Post(Tarea valor)
-        {
+        {            
             if (valor.Id == 0)
             {
                 ctx.Tareas.Add(valor);
@@ -44,7 +50,7 @@ namespace WebApplication1.Data
             ctx.SaveChanges();
             return valor;
         }
-        */
+        
 
     }
 }
