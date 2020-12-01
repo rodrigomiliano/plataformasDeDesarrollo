@@ -9,8 +9,8 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201117002151_asd")]
-    partial class asd
+    [Migration("20201130235303_WebApp1")]
+    partial class WebApp1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -70,8 +70,8 @@
         {
             Modelo = new Detalle();
         }
-        Recursos = await DetalleService.GetResource();
-        Tareas = await DetalleService.GetTask();
+        Recursos = await RecursoService.ListResource();
+        Tareas = await TareaService.ListTask();
     }
 
 
