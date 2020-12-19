@@ -24,7 +24,7 @@ namespace BlazorApp1.Data
             return await remoteService.GetAllRecurso();
         }
 
-        public async Task<Recurso> SelectResource(int id)
+        public async Task<Recurso> SelectResource(int id)//GET
         {
             var remoteService = RestService.For<IRemoteService>("https://localhost:44321/api/");
             return await remoteService.GetRecurso(id);

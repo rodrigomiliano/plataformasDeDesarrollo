@@ -52,7 +52,8 @@ namespace WebApplication1.Controllers
         }*/
 
         [HttpPost]
-        public IActionResult Post(Detalle valor)
+        //public IActionResult Post(Detalle valor)
+        public Detalle Post(Detalle valor)
         {
             var local = ctx.Detalles.Local.FirstOrDefault(e => e.Id.Equals(valor.Id));
 
@@ -68,8 +69,26 @@ namespace WebApplication1.Controllers
                 ctx.Entry(valor).State = EntityState.Modified;
             }
             ctx.SaveChanges();
-            return Ok(valor);
+            return valor;
         }
+
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var Borrar = await ctx.Detalles.FindAsync(id);
+            if (Borrar == null)
+            {
+                return NotFound();
+            }
+
+            ctx.Detalles.Remove(Borrar);
+            await ctx.SaveChangesAsync();
+
+            return NoContent();
+        }
+
 
     }
 }
